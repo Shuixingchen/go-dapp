@@ -6,7 +6,7 @@ import (
 	"math/big"
 	"strings"
 
-	"github.com/Shuixingchen/go-dapp/contract/artificial/erc721"
+	"github.com/Shuixingchen/go-dapp/artificial/erc721"
 
 	"github.com/ethereum/go-ethereum/accounts/abi"
 	"github.com/ethereum/go-ethereum/common"
@@ -49,7 +49,7 @@ func singTx(wallet *Wallet) (*types.Transaction, error) {
 		To:      common.HexToAddress("0xD9478B7cf6C4ACD11e90701Aa6C335B93a2C2368"),
 		TokenID: big.NewInt(0),
 	}
-	abi, err := abi.JSON(strings.NewReader(erc721.Erc721ABI))
+	abi, err := abi.JSON(strings.NewReader(erc721.ERC721ABI))
 	callData, err := abi.Pack("transferFrom", params)
 	if err != nil {
 		fmt.Println("abi.Pack", err)
