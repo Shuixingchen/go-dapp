@@ -1,0 +1,34 @@
+appname: "slothX"
+appdebug: true
+coin: "polygon"
+start: 26766653
+nodes: 
+  eth:
+  - addr: "https://mainnet.infura.io/v3/40b043c639b44d72966d3535d523a4b3"
+    chain: "mainnet"
+    type: ""
+statsdatabase:
+  polygon:
+    read:
+      name: "polygon:read"
+      dsn: "root:123456@tcp(127.0.0.1:3306)/slothX?charset=utf8"
+      # dsn: "slothxrw:m4HKTae5@tcp(slothx.cpzkllml9x7w.ap-southeast-1.rds.amazonaws.com:3306)/slothX?charset=utf8"
+      type: ""
+      sshname: ""
+    write:
+      name: "polygon:write"
+      dsn: "root:123456@tcp(127.0.0.1:3306)/slothX?charset=utf8"
+      # dsn: "slothxrw:m4HKTae5@tcp(slothx.cpzkllml9x7w.ap-southeast-1.rds.amazonaws.com:3306)/slothX?charset=utf8"
+      type: ""
+      sshname: ""
+parseredis:
+  addr: "127.0.0.1:6379"
+  password: ""
+  db: 0
+log:
+  level: "debug"
+  path: "./logs/"
+  filename: "fixer.log"
+pyroscope:
+#   enabled: true
+#   address: "http://127.0.0.1:4040"

@@ -16,14 +16,13 @@ import (
 
 	"github.com/Shuixingchen/go-dapp/artificial/erc20"
 
-	log "github.com/sirupsen/logrus"
-
 	"github.com/ethereum/go-ethereum"
 	"github.com/ethereum/go-ethereum/accounts/abi"
 	"github.com/ethereum/go-ethereum/accounts/abi/bind"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/core/types"
 	"github.com/ethereum/go-ethereum/crypto"
+	log "github.com/sirupsen/logrus"
 )
 
 var (
@@ -260,6 +259,9 @@ func QueryERC1155Balance(addr, owner, num string) {
 	}
 	o, err := tc.OwnerOf(nil, tokenId)
 	b, err := tc.BalanceOf(nil, common.HexToAddress(owner))
+	if err != nil {
+		log.WithField("Method", "BalanceOf").Error(err)
+	}
 	ids := []*big.Int{tokenId}
 	owners := []common.Address{common.HexToAddress(owner)}
 	balances, err := tc.BalanceOfBatch(nil, owners, ids)

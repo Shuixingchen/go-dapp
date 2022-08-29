@@ -4,6 +4,8 @@ import (
 	"crypto/ecdsa"
 	"log"
 
+	"github.com/Shuixingchen/go-dapp/plugins/clients"
+	"github.com/Shuixingchen/go-dapp/utils"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/crypto"
 	"github.com/ethereum/go-ethereum/ethclient"
@@ -12,11 +14,13 @@ import (
 var (
 	ec  *ethclient.Client
 	ecw *ethclient.Client
+	evm *clients.EvmClient
 )
 
 func init() {
+	initConfig()
 	var err error
-	ec, err = ethclient.Dial("https://polygon-mumbai.g.alchemy.com/v2/_4xDtlTKWmynPDVaX1JfRvysRif0wZ85")
+	ec, err = ethclient.Dial("http://54.255.92.123:8545")
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -24,7 +28,11 @@ func init() {
 	if err != nil {
 		log.Fatal(err)
 	}
+	evm = clients.NewEvmClient(utils.Config.Nodes["eth"])
+}
 
+func initConfig() {
+	utils.InitConfig("./configs/config.yaml")
 }
 
 type Wallet struct {
