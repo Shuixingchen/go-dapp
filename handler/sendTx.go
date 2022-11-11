@@ -2,6 +2,7 @@ package handler
 
 import (
 	"context"
+	"encoding/hex"
 	"fmt"
 	"math/big"
 	"strings"
@@ -85,4 +86,20 @@ func ParseAddressFromSigTx() {
 
 	fmt.Println("sender: ", senderAddr.Hex())
 	fmt.Println("addressHex: ", wallet.PublicKey)
+}
+
+// 组装tx.Data,请求合约方法
+func CallData() {
+	params := transferFromParam{
+		From:    common.HexToAddress("0xe725D3"),
+		To:      common.HexToAddress("0xD9478B"),
+		TokenID: big.NewInt(0),
+	}
+	abi, err := abi.JSON(strings.NewReader(erc721.ERC721ABI))
+	callData, err := abi.Pack("transferFrom", params.From, params.To, params.TokenID)
+	if err != nil {
+		fmt.Println("abi.Pack", err)
+	}
+	dataHex := hex.EncodeToString(callData)
+	fmt.Println(dataHex)
 }

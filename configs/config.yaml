@@ -4,7 +4,10 @@ coin: "polygon"
 start: 26766653
 nodes: 
   eth:
-  - addr: "https://mainnet.infura.io/v3/40b043c639b44d72966d3535d523a4b3"
+  # - addr: "https://mainnet.infura.io/v3/40b043c639b44d72966d3535d523a4b3"
+  #   chain: "mainnet"
+  #   type: ""
+  - addr: "wss://eth-mainnet.g.alchemy.com/v2/5ag7cUyn73hi1WI5rYpU_aK9aZaIb4rk"
     chain: "mainnet"
     type: ""
 statsdatabase:

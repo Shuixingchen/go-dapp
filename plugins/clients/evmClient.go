@@ -148,3 +148,13 @@ func (ec *EvmClient) GetTokenBalance(tokenAddr string, holderAddr string) (*big.
 	}
 	return tc.BalanceOf(nil, common.HexToAddress(holderAddr))
 }
+
+func (ec *EvmClient) SubscribependdingTx(ctx context.Context, ch chan<- string) (sub ethereum.Subscription, err error) {
+	for _, c := range ec.RPCClients {
+		sub, err = c.EthSubscribe(ctx, ch, "newPendingTransactions")
+		if err == nil {
+			return
+		}
+	}
+	return
+}

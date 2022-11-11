@@ -20,7 +20,7 @@ var (
 func init() {
 	initConfig()
 	var err error
-	ec, err = ethclient.Dial("http://54.255.92.123:8545")
+	ec, err = ethclient.Dial("https://mainnet.infura.io/v3/40b043c639b44d72966d3535d523a4b3")
 	if err != nil {
 		log.Fatal(err)
 	}

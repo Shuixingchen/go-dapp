@@ -641,24 +641,11 @@ func ListenEvent() {
 	}
 }
 
-// func GetBlockData(blockNumber int64) {
-// 	erc20TxList := make([]*gokit.ERC20Tx, 0)
-// 	nfttxs := make([]*gokit.NFTTransaction, 0)
-// 	approvals := make([]*gokit.ApprovalLog, 0)
-// 	approvalfoAll := make([]*gokit.ApprovalForAllLog, 0)
-// 	number := strconv.FormatInt(blockNumber, 16)
-// 	blockStr := []byte(`{"jsonrpc":"2.0","method":"eth_getBlockByNumber","params":["0x` + number + `",false],"id":1}`)
-// 	result := Fetch(blockStr)
-// 	var block Block
-// 	if err := json.Unmarshal([]byte(result), &block); err != nil {
-// 		log.WithFields(log.Fields{"method": "GetTransactionReceipt", "params": result}).Panic(err)
-// 	}
-// 	for _, txHash := range block.Transactions {
-// 		aa, bb, cc, dd := ParseTx(txHash)
-// 		erc20TxList = append(erc20TxList, aa...)
-// 		nfttxs = append(nfttxs, bb...)
-// 		approvals = append(approvals, cc...)
-// 		approvalfoAll = append(approvalfoAll, dd...)
-// 	}
-// 	fmt.Printf("erc20:%d nfttx: %d appproval:%d approvalfoAll:%d", len(erc20TxList), len(nfttxs), len(approvals), len(approvalfoAll))
-// }
+func GetCode(contractAddr string) []byte {
+	addr := common.HexToAddress(contractAddr)
+	bytecode, err := ec.CodeAt(context.Background(), addr, nil)
+	if err != nil {
+		fmt.Println(err)
+	}
+	return bytecode
+}

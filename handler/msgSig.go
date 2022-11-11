@@ -158,3 +158,23 @@ func VerifyHandler() {
 	VerifySig2(message, signature, addr)
 	// VerifySig(message, signature)
 }
+
+// pubkey to address
+func PubkeyToAddress() {
+	pub, err := hex.DecodeString("04a83030e54912f617b4ff35a85cc7ffde9ba2de3f8aa32ddc9c9a39f1df5714fc624958470bc53cf65b179e045bfbb3d5a784b982d064db2a2d4480d5d22c6ddb")
+	if err != nil {
+		fmt.Println(err, "hex.DecodeString")
+	}
+	escaPub, err := crypto.UnmarshalPubkey(pub)
+	if err != nil {
+		fmt.Println(err, "UnmarshalPubkey")
+	}
+	addr := crypto.PubkeyToAddress(*escaPub)
+	fmt.Println(addr.Hex())
+}
+
+func KeyShow() {
+	privateKey, _ := crypto.HexToECDSA("19935d89cb5c67657c64a6383d601e30f04eb179a0369227403e5343bba22107")
+
+	fmt.Println("public key no 0x \n", hex.EncodeToString(crypto.FromECDSAPub(&privateKey.PublicKey)))
+}
