@@ -53,7 +53,7 @@ const (
 	_INTERFACE_ID_ERC721_ENUMERABLE = "0x780e9d63"
 )
 
-// ECDSA验证签名
+// ECDSA验证签名 签名+原始数据=>公钥
 // 前提条件：签名，原始数据以及签名者的公钥/地址
 func VerifySig(msg, signature string) bool {
 	// 1.准备公钥
@@ -114,7 +114,7 @@ func VerifySig2(msg, signature, addr string) bool {
 	return false
 }
 
-// ECDSA签名
+// ECDSA签名 原始数据+私钥=》签名数据
 func SignMessage(msg string) string {
 	// 1.准备私钥
 	privateKey, err := crypto.HexToECDSA("19935d89cb5c67657c64a6383d601e30f04eb179a0369227403e5343bba22107")

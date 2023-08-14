@@ -23,6 +23,10 @@ type Instruction struct {
 func CheckContractFunction(contractAddr string) {
 	d := NewDisassemble()
 	d.Start(GetCode(contractAddr))
+	for _, v := range d.Instructions {
+		fmt.Printf("%s  %s  %s \n", v.PC, v.Op, v.Arg)
+	}
+	return
 	funcs := d.GetFunctions()
 	isERC20 := matchFunctions(funcs, utils.ERC20FunctionSig)
 	fmt.Println(isERC20)
